@@ -22,6 +22,8 @@ import './index.css';
 //  - border
 function App() {
   // State
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
   const [username, setUsername] = React.useState('');
   const [errorUserName, setErrorUsername] = React.useState(false);
   const [errorUserNameText, setErrorUserNameText] = React.useState('');
@@ -37,6 +39,7 @@ function App() {
 
   // handler FN
   const handleChangeUserName = (event) => {
+    setIsSubmit(false);
     setUsername(event.target.value);
     if (errorUserName) {
       setErrorUsername(false);
@@ -44,6 +47,7 @@ function App() {
     }
   };
   const handleChangePassword = (event) => {
+    setIsSubmit(false);
     setPassword(event.target.value);
     if (errorPassword) {
       setErrorPassword(false);
@@ -51,6 +55,7 @@ function App() {
     }
   };
   const handleChangeConfirmPassword = (event) => {
+    setIsSubmit(false);
     setConfirmPassword(event.target.value);
     if (errorConfirmPassword) {
       setErrorConfirmPassword(false);
@@ -59,6 +64,7 @@ function App() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsSubmit(true);
     // Validation
 
     // Required
@@ -102,7 +108,11 @@ function App() {
           <label>
             username<span class='required__text'>*</span>
           </label>
-          <input className='input__error' value={username} onChange={handleChangeUserName} />
+          <input
+            className={(errorUserName && 'input__error') || (isSubmit && 'input__success')}
+            value={username}
+            onChange={handleChangeUserName}
+          />
           {errorUserName && <p className='text__error'>{errorUserNameText}</p>}
         </div>
         <div className='form__input'>
@@ -111,7 +121,7 @@ function App() {
           </label>
           <input
             type='password'
-            className='input__success'
+            className={(errorPassword && 'input__error') || (isSubmit && 'input__success')}
             value={password}
             onChange={handleChangePassword}
           />
@@ -121,7 +131,12 @@ function App() {
           <label>
             confirm password<span class='required__text'>*</span>
           </label>
-          <input type='password' value={confirmPassword} onChange={handleChangeConfirmPassword} />
+          <input
+            type='password'
+            className={(errorConfirmPassword && 'input__error') || (isSubmit && 'input__success')}
+            value={confirmPassword}
+            onChange={handleChangeConfirmPassword}
+          />
           {errorConfirmPassword && <p className='text__error'>{errorConfirmPasswordText}</p>}
         </div>
         <button type='submit'>Sign Up</button>
