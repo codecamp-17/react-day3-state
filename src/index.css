@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -44,4 +49,16 @@ code {
 
 .form__input > input {
   padding: 6px;
+  border-radius: 4px;
+}
+
+.input__error {
+  border: 2px solid red;
+}
+.input__success {
+  border: 2px solid green;
+}
+
+.text__error {
+  color: red;
 }

@@ -12,15 +12,18 @@ function App() {
         <h2>Register Form</h2>
         <div className='form__input'>
           <label>username </label>
-          <input />
+          <input className='input__error' />
+          <p className='text__error'>username is required</p>
         </div>
         <div className='form__input'>
           <label>password </label>
-          <input />
+          <input className='input__success' />
+          <p className='text__error'>password is required</p>
         </div>
         <div className='form__input'>
           <label>confirmPassword </label>
           <input />
+          <p className='text__error'>confirm password mismatch</p>
         </div>
         <button>Submit</button>
       </form>
