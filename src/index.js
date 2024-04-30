@@ -67,22 +67,25 @@ function App() {
 
     // Required
     if (!username) {
-      setError({ ...error, errorUserName: 'username is required' });
+      setError((prev) => ({ ...prev, errorUserName: 'username is required' }));
     } else if (username.length < 8 || username.length > 24) {
-      setError({ ...error, errorUserName: 'username must have  8-24 character' });
+      setError((prev) => ({ ...prev, errorUserName: 'username must have  8-24 character' }));
     }
 
     if (!password) {
-      setError({ ...error, errorPassword: 'password is required' });
+      setError((prev) => ({ ...prev, errorPassword: 'password is required' }));
     } else if (password.length < 8 || password.length > 16) {
-      setError({ ...error, errorPassword: 'password must have 8-16 character' });
+      setError((prev) => ({ ...prev, errorPassword: 'password must have 8-16 character' }));
     }
     if (!confirmPassword) {
-      setError({ ...error, errorConfirmPassword: 'confirm password is required' });
+      setError((prev) => ({ ...prev, errorConfirmPassword: 'confirm password is required' }));
     } else if (confirmPassword.length < 8 || confirmPassword.length > 16) {
-      setError({ ...error, errorConfirmPassword: 'confirm password must have 8-16 character' });
+      setError((prev) => ({
+        ...prev,
+        errorConfirmPassword: 'confirm password must have 8-16 character',
+      }));
     } else if (password !== confirmPassword) {
-      setError({ ...error, errorConfirmPassword: 'confirm password mismatch' });
+      setError((prev) => ({ ...prev, errorConfirmPassword: 'confirm password mismatch' }));
     }
 
     // Save Backend
