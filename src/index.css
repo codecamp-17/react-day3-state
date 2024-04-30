@@ -31,7 +31,7 @@ code {
 
   border-radius: 8px;
   padding: 30px;
-  /* background-image: linear-gradient(to right bottom, #29de98, #57e186, #79e473, #98e65f, #b6e64c); */
+  background-image: linear-gradient(to right bottom, #29de98, #57e186, #79e473, #98e65f, #b6e64c);
   box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 30px;
 }
 
