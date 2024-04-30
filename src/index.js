@@ -1,22 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// ## Lab2
+// ## Lab3
 // - UI
-// - Handler Fn
-// - UI + Handler FN (Binding Event)
+// - Handler Function
+// - Binding Event (UI + Handler FN)
 function App() {
-  const handleSelect = (event) => {
+  const handleCheck = (event) => {
+    console.log(event.target.name);
     console.log(event.target.value);
+    console.log(event.target.checked);
   };
   return (
-    <select onChange={handleSelect}>
-      <option value='THAILAND'>Thailand</option>
-      <option value='LAOS'>Laos</option>
-      <option value='MYANMAR'>Myanmar</option>
-      <option value='VIETNAM'>VietNam</option>
-      <option value='MALAYSIA'>Malaysia</option>
-    </select>
+    <>
+      <input
+        type='checkbox'
+        name='phoneBrand'
+        id='phone-1'
+        value='SAMSUNG'
+        onChange={handleCheck}
+      />
+      <label htmlFor='phone-1'>Samsung</label>
+      <br />
+      <input
+        type='checkbox'
+        name='phoneBrand'
+        id='phone-2'
+        value='IPHOONE'
+        onChange={handleCheck}
+      />
+      <label htmlFor='phone-2'>IPhoone</label> <br />
+      <input type='checkbox' name='phoneBrand' id='phone-3' value='HUAWI' onChange={handleCheck} />
+      <label htmlFor='phone-3'>HuaWi</label> <br />
+    </>
   );
 }
 
