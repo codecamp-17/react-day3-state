@@ -25,12 +25,14 @@ code {
 .form {
   display: flex;
   flex-direction: column;
+  /* align-items: stretch; */
   gap: 20px;
   flex-basis: 350px;
 
-  border: 1px solid black;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 30px;
+  background-image: linear-gradient(to right bottom, #29de98, #57e186, #79e473, #98e65f, #b6e64c);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 30px;
 }
 
 .form > button {
@@ -39,6 +41,10 @@ code {
   cursor: pointer;
   border-radius: 4px;
   margin-top: 20px;
+}
+.form > button:hover {
+  background: black;
+  color: white;
 }
 
 .form__input {
@@ -60,5 +66,8 @@ code {
 }
 
 .text__error {
+  color: red;
+}
+.required__text {
   color: red;
 }
