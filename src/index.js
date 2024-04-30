@@ -34,7 +34,13 @@ function TodoList() {
   return (
     <ul className='todo__list'>
       {todoList.map((todo) => (
-        <TodoItem key={todo.id} todoId={todo.id} task={todo.task} onDelete={handleDelete} />
+        <TodoItem
+          key={todo.id}
+          todoId={todo.id}
+          task={todo.task}
+          onDelete={handleDelete}
+          setTodoList={setTodoList}
+        />
       ))}
     </ul>
   );
@@ -43,7 +49,7 @@ function TodoItem(props) {
   return (
     <li className='todo__item'>
       <p>{props?.task || ''}</p>
-      <button>edit</button>
+      <button onClick={() => props.setTodoList([])}>reset</button>
       <button onClick={() => props.onDelete(props.todoId)}>x</button>
     </li>
   );
