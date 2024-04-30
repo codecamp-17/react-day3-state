@@ -10,9 +10,18 @@ function App() {
     <div className='app'>
       <form className='form'>
         <h2>Register Form</h2>
-        <input />
-        <input />
-        <input />
+        <div className='form__input'>
+          <label>username </label>
+          <input />
+        </div>
+        <div className='form__input'>
+          <label>password </label>
+          <input />
+        </div>
+        <div className='form__input'>
+          <label>confirmPassword </label>
+          <input />
+        </div>
         <button>Submit</button>
       </form>
     </div>

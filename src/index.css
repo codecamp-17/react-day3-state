@@ -20,7 +20,7 @@ code {
 .form {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
   flex-basis: 350px;
 
   border: 1px solid black;
@@ -28,12 +28,20 @@ code {
   padding: 30px;
 }
 
-.form > input {
-  padding: 6px;
-}
-
 .form > button {
   border: none;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.form__input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form__input > input {
+  padding: 6px;
 }
