@@ -37,11 +37,6 @@ function App() {
   // State
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const [errorUserNameText, setErrorUserNameText] = React.useState('');
-  const [errorPasswordText, setErrorPasswordText] = React.useState('');
-  const [errorConfirmPasswordText, setErrorConfirmPasswordText] = React.useState('');
-  // state สำหรับ password,confirmPassword
-
   // handler FN
   const handleChangeUserName = (event) => {
     setIsSubmit(false);
@@ -72,22 +67,22 @@ function App() {
 
     // Required
     if (!username) {
-      setErrorUserNameText('username is required');
+      setError({ ...error, errorUserName: 'username is required' });
     } else if (username.length < 8 || username.length > 24) {
-      setErrorUserNameText('username must have  8-24 character');
+      setError({ ...error, errorUserName: 'username must have  8-24 character' });
     }
 
     if (!password) {
-      setErrorPasswordText('password is required');
+      setError({ ...error, errorPassword: 'password is required' });
     } else if (password.length < 8 || password.length > 16) {
-      setErrorPasswordText('password must have 8-16 character');
+      setError({ ...error, errorPassword: 'password must have 8-16 character' });
     }
     if (!confirmPassword) {
-      setErrorConfirmPasswordText('confirm password is required');
+      setError({ ...error, errorConfirmPassword: 'confirm password is required' });
     } else if (confirmPassword.length < 8 || confirmPassword.length > 16) {
-      setErrorConfirmPasswordText('confirm password must have 8-16 character');
+      setError({ ...error, errorConfirmPassword: 'confirm password must have 8-16 character' });
     } else if (password !== confirmPassword) {
-      setErrorConfirmPasswordText('confirm password mismatch');
+      setError({ ...error, errorConfirmPassword: 'confirm password mismatch' });
     }
 
     // Save Backend
