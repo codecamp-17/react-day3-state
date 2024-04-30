@@ -21,18 +21,22 @@ import './index.css';
 //  - validation Text
 //  - border
 function App() {
+  // State-Refactor
+  const [userData, setUserData] = React.useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+
   // State
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const [username, setUsername] = React.useState('');
   const [errorUserName, setErrorUsername] = React.useState(false);
   const [errorUserNameText, setErrorUserNameText] = React.useState('');
 
-  const [password, setPassword] = React.useState('');
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorPasswordText, setErrorPasswordText] = React.useState('');
 
-  const [confirmPassword, setConfirmPassword] = React.useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = React.useState(true);
   const [errorConfirmPasswordText, setErrorConfirmPasswordText] = React.useState('');
   // state สำหรับ password,confirmPassword
@@ -40,7 +44,7 @@ function App() {
   // handler FN
   const handleChangeUserName = (event) => {
     setIsSubmit(false);
-    setUsername(event.target.value);
+    setUserData({ ...userData, username: event.target.value });
     if (errorUserName) {
       setErrorUsername(false);
       setErrorUserNameText('');
@@ -48,7 +52,7 @@ function App() {
   };
   const handleChangePassword = (event) => {
     setIsSubmit(false);
-    setPassword(event.target.value);
+    setUserData({ ...userData, password: event.target.value });
     if (errorPassword) {
       setErrorPassword(false);
       setErrorPasswordText('');
@@ -56,7 +60,7 @@ function App() {
   };
   const handleChangeConfirmPassword = (event) => {
     setIsSubmit(false);
-    setConfirmPassword(event.target.value);
+    setUserData({ ...userData, confirmPassword: event.target.value });
     if (errorConfirmPassword) {
       setErrorConfirmPassword(false);
       setErrorConfirmPasswordText('');
@@ -66,6 +70,7 @@ function App() {
     event.preventDefault();
     setIsSubmit(true);
     // Validation
+    const { username, password, confirmPassword } = userData;
 
     // Required
     if (!username) {
@@ -106,35 +111,37 @@ function App() {
         <h2>Register Form</h2>
         <div className='form__input'>
           <label>
-            username<span class='required__text'>*</span>
+            username<span className='required__text'>*</span>
           </label>
           <input
-            className={(errorUserName && 'input__error') || (isSubmit && 'input__success')}
-            value={username}
+            className={(errorUserName ? 'input__error' : '') || (isSubmit ? 'input__success' : '')}
+            value={userData?.username || ''}
             onChange={handleChangeUserName}
           />
           {errorUserName && <p className='text__error'>{errorUserNameText}</p>}
         </div>
         <div className='form__input'>
           <label>
-            password<span class='required__text'>*</span>
+            password<span className='required__text'>*</span>
           </label>
           <input
             type='password'
-            className={(errorPassword && 'input__error') || (isSubmit && 'input__success')}
-            value={password}
+            className={(errorPassword ? 'input__error' : '') || (isSubmit ? 'input__success' : '')}
+            value={userData?.password || ''}
             onChange={handleChangePassword}
           />
           {errorPassword && <p className='text__error'>{errorPasswordText}</p>}
         </div>
         <div className='form__input'>
           <label>
-            confirm password<span class='required__text'>*</span>
+            confirm password<span className='required__text'>*</span>
           </label>
           <input
             type='password'
-            className={(errorConfirmPassword && 'input__error') || (isSubmit && 'input__success')}
-            value={confirmPassword}
+            className={
+              (errorConfirmPassword ? 'input__error' : '') || (isSubmit ? 'input__success' : '')
+            }
+            value={userData?.confirmPassword || ''}
             onChange={handleChangeConfirmPassword}
           />
           {errorConfirmPassword && <p className='text__error'>{errorConfirmPasswordText}</p>}
