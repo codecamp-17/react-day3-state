@@ -13,12 +13,14 @@ function Child(props) {
       setResult(result);
     }
   };
+  const handleIncrease = () => props.setN1((p) => p + 1);
   return (
     <>
       <h2>Action : {props.action} </h2>
       <p>num1 : {props.num1}</p>
       <p>num2 : {props.num2}</p>
       <button onClick={handleClick}>Calculate</button>
+      <button onClick={handleIncrease}> +1 : num1</button>
       <p>Result : {result} </p>
     </>
   );
@@ -38,8 +40,9 @@ function Parent() {
   // Share Parent's Logic via Props (ส่ง props เป็น Fn)
   return (
     <>
-      <Child num1={n1} num2={n2} action={action1} addFN={add} minusFN={minus} />
-      <Child num1={n1} num2={n2 + 10} action={action2} addFN={add} minusFN={minus} />
+      <button onClick={() => setN1((p) => p + 1)}>+1 : num1</button>
+      <Child num1={n1} num2={n2} action={action1} addFN={add} minusFN={minus} setN1={setN1} />
+      <Child num1={n1} num2={n2 + 10} action={action2} addFN={add} minusFN={minus} setN1={setN1} />
     </>
   );
 }
