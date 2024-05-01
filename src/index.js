@@ -19,6 +19,9 @@ const INIT_TODO = [
   { id: 5, task: 'Coding' },
 ];
 function TodoList() {
+  // Schemas
+  // Todo : {id:number , task:string}
+  // TodoList : Array<Todo>
   const [todoList, setTodoList] = useState(INIT_TODO || []);
 
   // DELETE TODO : Execute / Fire
@@ -36,9 +39,9 @@ function TodoList() {
       {todoList.map((todo) => (
         <TodoItem
           key={todo.id}
-          todoId={todo.id}
-          task={todo.task}
-          onDelete={handleDelete}
+          todoId={todo.id} // 1, 2, 3, ...
+          task={todo.task} // "Do Hw", "Play football", "Sleep"
+          onDelete={handleDelete} // (todoId) => {.... // code }
           setTodoList={setTodoList}
         />
       ))}
@@ -46,11 +49,14 @@ function TodoList() {
   );
 }
 function TodoItem(props) {
+  const handleDelete = (event) => {
+    props.onDelete(props.todoId);
+  };
   return (
     <li className='todo__item'>
       <p>{props?.task || ''}</p>
-      <button onClick={() => props.setTodoList([])}>reset</button>
-      <button onClick={() => props.onDelete(props.todoId)}>x</button>
+      <button onClick={() => {}}>edit</button>
+      <button onClick={handleDelete}>x</button>
     </li>
   );
 }
