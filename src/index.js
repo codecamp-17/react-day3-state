@@ -3,21 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 function AddTodo(props) {
-  const { todoList, setTodoList } = props;
+  const { handleAdd: handleAddTodo } = props;
 
   const [task, setTask] = useState('');
 
   const handleChange = (event) => setTask(event.target.value);
 
   const handleAdd = () => {
-    // submit
-    console.log('add todo');
-    // START --- Logic - Add
-    const newTodo = [...todoList];
-    newTodo.push({ id: newTodo.length + 1, task: task });
-    setTodoList(newTodo);
-    // END --- Logic - Add
-
+    handleAddTodo(task);
     setTask('');
   };
   return (
@@ -36,28 +29,8 @@ const INIT_TODO = [
   { id: 5, task: 'Coding' },
 ];
 function TodoList(props) {
-  const { todoList, setTodoList } = props;
+  const { todoList, handleDelete, handleUpdate } = props;
 
-  // DELETE TODO => SetTodoList
-  const handleDelete = (todoId) => {
-    const foundedIndex = todoList.findIndex((todo) => todo.id === todoId);
-    if (foundedIndex !== -1) {
-      const remainTodo = [...todoList]; // clone oldTodo
-      remainTodo.splice(foundedIndex, 1);
-      setTodoList(remainTodo);
-    }
-  };
-
-  // UPDATE TODO
-  const handleUpdate = (todoId, newTask) => {
-    const foundedIndex = todoList.findIndex((todo) => todo.id === todoId);
-    if (foundedIndex !== -1) {
-      const newTodoList = [...todoList];
-      let oldTodo = newTodoList[foundedIndex];
-      oldTodo.task = newTask;
-      setTodoList(newTodoList);
-    }
-  };
   return (
     <ul className='todo__list'>
       {todoList.map((todo) => (
@@ -104,12 +77,44 @@ function TodoItem(props) {
 
 function App() {
   const [todoList, setTodoList] = useState(INIT_TODO || []);
+
+  // ADD TODO
+  const handleAddTodo = (task) => {
+    const newTodo = [...todoList];
+    newTodo.push({ id: newTodo.length + 1, task: task });
+    setTodoList(newTodo);
+  };
+
+  // DELETE TODO => SetTodoList
+  const handleDeleteTodo = (todoId) => {
+    const foundedIndex = todoList.findIndex((todo) => todo.id === todoId);
+    if (foundedIndex !== -1) {
+      const remainTodo = [...todoList]; // clone oldTodo
+      remainTodo.splice(foundedIndex, 1);
+      setTodoList(remainTodo);
+    }
+  };
+  // UPDATE TODO
+  const handleUpdateTodo = (todoId, newTask) => {
+    const foundedIndex = todoList.findIndex((todo) => todo.id === todoId);
+    if (foundedIndex !== -1) {
+      const newTodoList = [...todoList];
+      let oldTodo = newTodoList[foundedIndex];
+      oldTodo.task = newTask;
+      setTodoList(newTodoList);
+    }
+  };
+
   return (
     <div className='app'>
       <div className='todo'>
         <h1>TodoList</h1>
-        <AddTodo todoList={todoList} setTodoList={setTodoList} />
-        <TodoList todoList={todoList} setTodoList={setTodoList} />
+        <AddTodo handleAdd={handleAddTodo} />
+        <TodoList
+          todoList={todoList}
+          handleDelete={handleDeleteTodo}
+          handleUpdate={handleUpdateTodo}
+        />
       </div>
     </div>
   );
