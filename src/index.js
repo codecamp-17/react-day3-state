@@ -20,7 +20,7 @@ function App() {
     <div className='app'>
       <div className='accordion__list'>
         {data.map((accordion) => (
-          <Accordion key={accordion.id} title={accordion.title} content={data.content} />
+          <Accordion key={accordion.id} title={accordion.title} content={accordion.content} />
         ))}
       </div>
     </div>
