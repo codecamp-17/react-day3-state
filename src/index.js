@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 function Child(props) {
+  const [result, setResult] = React.useState(0);
   // Handler Child
   const handleClick = () => {
     if (props.action === 'การบวก') {
       let result = props.addFN(props.num1, props.num2); // add(5,10) , add(5,20)
-      console.log('Result', result);
+      setResult(result);
     } else if (props.action === 'การลบ') {
       let result = props.minusFN(props.num1, props.num2); // minus(5,10) , minus(5,20)
-      console.log('Result', result);
+      setResult(result);
     }
   };
   return (
@@ -18,17 +19,18 @@ function Child(props) {
       <p>num1 : {props.num1}</p>
       <p>num2 : {props.num2}</p>
       <button onClick={handleClick}>Calculate</button>
-      <p>Result : </p>
+      <p>Result : {result} </p>
     </>
   );
 }
 
 function Parent() {
   // Parent's Data : string | number | boolean | null | undefined | Object | Array etc.
-  const n1 = 5;
-  const n2 = 10;
+  const [n1, setN1] = React.useState(5);
+  const [n2, setN2] = React.useState(10);
   const action1 = 'การบวก';
   const action2 = 'การลบ';
+
   // Parent's Logic : Function
   const add = (x, y) => x + y;
   const minus = (x, y) => x - y;
