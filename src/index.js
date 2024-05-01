@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-function AddTodo() {
+function AddTodo(props) {
+  const { todoList, setTodoList } = props;
+
   const [task, setTask] = useState('');
 
   const handleChange = (event) => setTask(event.target.value);
@@ -10,6 +12,12 @@ function AddTodo() {
   const handleAdd = () => {
     // submit
     console.log('add todo');
+    // START --- Logic - Add
+    const newTodo = [...todoList];
+    newTodo.push({ id: newTodo.length + 1, task: task });
+    setTodoList(newTodo);
+    // END --- Logic - Add
+
     setTask('');
   };
   return (
@@ -100,7 +108,7 @@ function App() {
     <div className='app'>
       <div className='todo'>
         <h1>TodoList</h1>
-        <AddTodo />
+        <AddTodo todoList={todoList} setTodoList={setTodoList} />
         <TodoList todoList={todoList} setTodoList={setTodoList} />
       </div>
     </div>
