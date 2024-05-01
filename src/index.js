@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-function AddTodo(props) {
-  const { handleAdd: handleAddTodo } = props;
-
+function AddTodo({ handleAdd: handleAddTodo }) {
   const [task, setTask] = useState('');
 
   const handleChange = (event) => setTask(event.target.value);
-
   const handleAdd = () => {
     handleAddTodo(task);
     setTask('');
@@ -28,9 +25,7 @@ const INIT_TODO = [
   { id: 4, task: 'Dinner' },
   { id: 5, task: 'Coding' },
 ];
-function TodoList(props) {
-  const { todoList, handleDelete, handleUpdate } = props;
-
+function TodoList({ todoList, handleDelete, handleUpdate }) {
   return (
     <ul className='todo__list'>
       {todoList.map((todo) => (
@@ -45,30 +40,30 @@ function TodoList(props) {
     </ul>
   );
 }
-function TodoItem(props) {
+function TodoItem({ task, todoId, onUpdate, onDelete }) {
   // UI-State
   const [isEdit, setIsEdit] = useState(false);
 
   // Business-State
-  const [task, setTask] = useState(props?.task || '');
+  const [newTask, setNewTask] = useState(task || '');
 
   // Handler
   const handleChangeInput = (event) => {
-    setTask(event.target.value);
+    setNewTask(event.target.value);
   };
 
   const handleEdit = () => {
     // EditMode : กด Save
-    if (isEdit) props.onUpdate(props.todoId, task);
+    if (isEdit) onUpdate(todoId, newTask);
     setIsEdit((p) => !p);
   };
 
   const handleDelete = () => {
-    props.onDelete(props.todoId);
+    onDelete(todoId);
   };
   return (
     <li className='todo__item'>
-      {isEdit ? <input value={task} onChange={handleChangeInput} /> : <p>{props?.task || ''}</p>}
+      {isEdit ? <input value={newTask} onChange={handleChangeInput} /> : <p>{task || ''}</p>}
       <button onClick={handleEdit}>{isEdit ? 'save' : 'edit'}</button>
       <button onClick={handleDelete}>x</button>
     </li>
